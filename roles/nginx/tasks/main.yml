@@ -1,0 +1,42 @@
+---
+- name: Install Nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: List ufw
+  shell: ufw app list
+  become: yes
+  register: output
+
+- name: Output ufw list
+  debug:
+    var: output
+
+- name: Allow Nginx HTTP
+  ufw:
+    rule: allow
+    name: Nginx HTTP
+
+- name: Remove sites-enabled symlink
+  file:
+   path: /etc/nginx/sites-enabled/default
+   state: absent
+
+- name: Set Nginx config
+  template:
+    src: nginx.conf
+    dest: "{{ nginx_conf_directory }}/default.conf"
+  notify: restart nginx
+
+- name: Create app directory
+  file:
+    path: "{{ static_directory }}"
+    state: directory
+    recurse: yes
+
+- name: Copy static content
+  copy:
+    src: ./static
+    dest: "{{ app_directory }}/"
+  notify: reload nginx

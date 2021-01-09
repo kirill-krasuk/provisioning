@@ -1,0 +1,4 @@
+---
+- name: Ping server
+  ping:
+    data: crash

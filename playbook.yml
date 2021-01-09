@@ -1,0 +1,7 @@
+---
+- name: Hosts configuring
+  hosts: "{{ RUN_ON_HOST }}"
+  become: yes
+  roles:
+    - preparing
+    - nginx

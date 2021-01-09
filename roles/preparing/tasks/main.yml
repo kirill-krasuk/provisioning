@@ -1,0 +1,10 @@
+---
+- name: Update apt dependencies
+  apt:
+    update_cache: yes
+
+- name: Install aptitude using apt
+  apt: 
+    name: aptitude
+    state: latest
+    force_apt_get: yes

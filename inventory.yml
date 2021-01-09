@@ -1,0 +1,13 @@
+all:
+  children:
+    app:
+      hosts:
+        app-main-server:
+          ansible_host: 3.138.191.220
+
+    api:
+      hosts:
+        api-main-server:
+          ansible_host: 3.19.143.123
+          ansible_ssh_private_key_file: ~/.ssh/donut_api_key.pem
+          

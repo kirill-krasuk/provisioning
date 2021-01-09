@@ -1,0 +1,5 @@
+---
+listen_http: 80
+app_directory: /usr/src/app
+static_directory: "{{ app_directory }}/static"
+nginx_conf_directory: /etc/nginx/conf.d
